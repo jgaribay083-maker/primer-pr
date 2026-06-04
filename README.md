@@ -2,7 +2,7 @@
 
 Este repositorio es una prueba con Claude Code.
 
-## Caracteristicas
+## Características
 - Simple y directo
 - Listo para colaborar
 
