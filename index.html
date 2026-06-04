@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3AMjogar</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: url('bg.jpg') center center / cover no-repeat fixed, linear-gradient(135deg, #0a0e1a 0%, #0d1b2e 30%, #1a2a4a 55%, #2c4a7c 75%, #3a6fa8 90%, #4a8ec4 100%);
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 10, 25, 0.45);
+      z-index: 0;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 20%, rgba(120, 180, 255, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e3a5f, #2d5a8e);
+      border: 3px solid rgba(100, 180, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 0 30px rgba(80, 160, 255, 0.3);
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      color: #e8f4ff;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(100, 180, 255, 0.6);
+    }
+
+    .tagline {
+      color: rgba(160, 210, 255, 0.7);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-top: -6px;
+    }
+
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #e8f4ff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(100, 180, 255, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(100, 180, 255, 0.5);
+      box-shadow: 0 8px 30px rgba(60, 140, 255, 0.2);
+      color: #fff;
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .icon-yt  { background: linear-gradient(135deg, #c00, #ff4444); }
+    .icon-ig  { background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737); }
+    .icon-tt  { background: #010101; border: 1px solid rgba(255,255,255,0.15); }
+    .icon-fb  { background: linear-gradient(135deg, #1877f2, #0d5abf); }
+    .icon-wa  { background: linear-gradient(135deg, #25d366, #128c7e); }
+
+    .btn-label { flex: 1; }
+
+    .arrow { color: rgba(100, 180, 255, 0.4); font-size: 0.8rem; }
+    .btn:hover .arrow { color: rgba(100, 180, 255, 0.8); }
+
+    .footer {
+      margin-top: 10px;
+      color: rgba(100, 160, 220, 0.35);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="avatar">🌩️</div>
+    <h1>3AMjogar</h1>
+    <p class="tagline">links</p>
+
+    <div class="links">
+      <a class="btn" href="http://www.youtube.com/@Jogarluvsu" target="_blank" rel="noopener">
+        <div class="icon icon-yt">▶</div>
+        <span class="btn-label">YouTube</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/jogar3am/" target="_blank" rel="noopener">
+        <div class="icon icon-ig">📸</div>
+        <span class="btn-label">Instagram</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="btn" href="https://www.tiktok.com/@3amjogar" target="_blank" rel="noopener">
+        <div class="icon icon-tt">♪</div>
+        <span class="btn-label">TikTok</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="btn" href="https://www.facebook.com/profile.php?id=61557603957557" target="_blank" rel="noopener">
+        <div class="icon icon-fb">f</div>
+        <span class="btn-label">Facebook</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <a class="btn" href="https://wa.me/16028217262" target="_blank" rel="noopener">
+        <div class="icon icon-wa">💬</div>
+        <span class="btn-label">WhatsApp</span>
+        <span class="arrow">›</span>
+      </a>
+    </div>
+
+    <p class="footer">3amjogar © 2026</p>
+  </div>
+</body>
+</html>
