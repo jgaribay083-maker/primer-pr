@@ -205,9 +205,48 @@
       font-size: 0.7rem;
       letter-spacing: 1px;
     }
+
+    /* Lluvia */
+    canvas#rain {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* Botón copiar link */
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(100, 180, 255, 0.08);
+      border: 1px solid rgba(100, 180, 255, 0.25);
+      border-radius: 20px;
+      padding: 7px 18px;
+      color: rgba(160, 210, 255, 0.8);
+      font-size: 0.78rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .copy-btn:hover {
+      background: rgba(100, 180, 255, 0.15);
+      border-color: rgba(100, 180, 255, 0.5);
+      color: #fff;
+    }
+
+    .copy-btn.copied {
+      background: rgba(80, 200, 120, 0.15);
+      border-color: rgba(80, 200, 120, 0.4);
+      color: #7eeaa0;
+    }
   </style>
 </head>
 <body>
+  <canvas id="rain"></canvas>
   <div class="overlay"></div>
   <div class="lightning"></div>
 
@@ -255,10 +294,50 @@
       </a>
     </div>
 
+    <button class="copy-btn" onclick="copyLink(this)">🔗 Copiar mi link</button>
     <p class="footer">3amjogar © 2026</p>
   </div>
 
   <script>
+    // Lluvia
+    const canvas = document.getElementById('rain');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+    const drops = Array.from({length: 120}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      len: Math.random() * 20 + 10,
+      speed: Math.random() * 4 + 2,
+      opacity: Math.random() * 0.5 + 0.1
+    }));
+
+    function drawRain() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drops.forEach(d => {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 1, d.y + d.len);
+        ctx.strokeStyle = `rgba(150, 210, 255, ${d.opacity})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        d.y += d.speed;
+        if (d.y > canvas.height) { d.y = -d.len; d.x = Math.random() * canvas.width; }
+      });
+      requestAnimationFrame(drawRain);
+    }
+    drawRain();
+
+    // Copiar link
+    function copyLink(btn) {
+      navigator.clipboard.writeText('https://jgaribay083-maker.github.io/primer-pr');
+      btn.textContent = '✅ Link copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '🔗 Copiar mi link'; btn.classList.remove('copied'); }, 2000);
+    }
+
     // Contador de visitas usando localStorage
     const key = '3amjogar_visits';
     const visits = parseInt(localStorage.getItem(key) || '0') + 1;
