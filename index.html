@@ -328,6 +328,136 @@
       border-color: rgba(80, 200, 120, 0.4);
       color: #7eeaa0;
     }
+
+    /* Reproductor de música */
+    .player {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(100, 180, 255, 0.18);
+      backdrop-filter: blur(12px);
+      animation: fadeUp 0.7s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player.playing {
+      border-color: rgba(100, 180, 255, 0.45);
+      box-shadow: 0 8px 30px rgba(60, 140, 255, 0.22);
+    }
+
+    .play-btn {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+      background: linear-gradient(135deg, #2d5a8e, #4a8ec4);
+      box-shadow: 0 0 22px rgba(80, 160, 255, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .play-btn:hover { transform: scale(1.08); box-shadow: 0 0 32px rgba(100, 180, 255, 0.7); }
+    .play-btn:active { transform: scale(0.95); }
+
+    .player-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .player-title {
+      color: #e8f4ff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-title small {
+      display: block;
+      color: rgba(160, 200, 245, 0.55);
+      font-size: 0.72rem;
+      font-weight: 400;
+    }
+
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress {
+      flex: 1;
+      height: 5px;
+      border-radius: 4px;
+      background: rgba(100, 180, 255, 0.15);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #4a8ec4, #8ac4ff);
+      box-shadow: 0 0 10px rgba(120, 190, 255, 0.6);
+    }
+
+    .player-time {
+      color: rgba(160, 210, 255, 0.6);
+      font-size: 0.68rem;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    /* Ecualizador animado (solo al reproducir) */
+    .eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 18px;
+      width: 22px;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .player.playing .eq { opacity: 1; }
+
+    .eq span {
+      width: 3px;
+      background: linear-gradient(180deg, #8ac4ff, #2d5a8e);
+      border-radius: 2px;
+      height: 30%;
+    }
+
+    .player.playing .eq span { animation: eqBounce 0.9s ease-in-out infinite; }
+    .eq span:nth-child(1) { animation-delay: 0s; }
+    .eq span:nth-child(2) { animation-delay: 0.2s; }
+    .eq span:nth-child(3) { animation-delay: 0.4s; }
+    .eq span:nth-child(4) { animation-delay: 0.1s; }
+
+    @keyframes eqBounce {
+      0%, 100% { height: 25%; }
+      50%      { height: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -393,6 +523,26 @@
       </a>
     </div>
 
+    <p class="section-label">Mi música</p>
+
+    <div class="player" id="player">
+      <button class="play-btn" id="playBtn" aria-label="Reproducir">▶</button>
+      <div class="player-info">
+        <span class="player-title">
+          Fading Headlights
+          <small>Phonk · prod. Josue Garibay</small>
+        </span>
+        <div class="progress-row">
+          <div class="progress" id="progress">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="player-time" id="playerTime">0:00</span>
+        </div>
+      </div>
+      <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <audio id="audio" preload="metadata" src="music/fading-headlights.mp3"></audio>
+    </div>
+
     <button class="copy-btn" onclick="copyLink(this)">🔗 Copiar mi link</button>
     <p class="footer">Josue Garibay © 2026</p>
   </div>
@@ -428,6 +578,54 @@
       requestAnimationFrame(drawRain);
     }
     drawRain();
+
+    // Reproductor de música
+    (function () {
+      const audio = document.getElementById('audio');
+      const player = document.getElementById('player');
+      const playBtn = document.getElementById('playBtn');
+      const fill = document.getElementById('progressFill');
+      const progress = document.getElementById('progress');
+      const timeEl = document.getElementById('playerTime');
+
+      const fmt = s => {
+        if (!isFinite(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60).toString().padStart(2, '0');
+        return `${m}:${sec}`;
+      };
+
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) audio.play(); else audio.pause();
+      });
+
+      audio.addEventListener('play', () => {
+        player.classList.add('playing');
+        playBtn.textContent = '❚❚';
+        playBtn.setAttribute('aria-label', 'Pausar');
+      });
+
+      audio.addEventListener('pause', () => {
+        player.classList.remove('playing');
+        playBtn.textContent = '▶';
+        playBtn.setAttribute('aria-label', 'Reproducir');
+      });
+
+      audio.addEventListener('loadedmetadata', () => { timeEl.textContent = fmt(audio.duration); });
+
+      audio.addEventListener('timeupdate', () => {
+        const pct = (audio.currentTime / audio.duration) * 100 || 0;
+        fill.style.width = pct + '%';
+        timeEl.textContent = fmt(audio.duration - audio.currentTime);
+      });
+
+      audio.addEventListener('ended', () => { fill.style.width = '0%'; });
+
+      progress.addEventListener('click', e => {
+        const rect = progress.getBoundingClientRect();
+        audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+      });
+    })();
 
     // Copiar link
     function copyLink(btn) {
