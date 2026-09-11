@@ -12,8 +12,7 @@
     body {
       min-height: 100vh;
       font-family: 'Inter', sans-serif;
-      background: url('bg.jpg') center center / cover no-repeat fixed,
-                  linear-gradient(135deg, #0a0e1a 0%, #1a2a4a 50%, #4a8ec4 100%);
+      background: #080b14;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,12 +20,25 @@
       overflow-x: hidden;
     }
 
-    .overlay {
+    /* Hero: la obra arriba, difuminada hacia el negro para que el texto se lea */
+    .hero-bg {
       position: fixed;
-      inset: 0;
-      background: rgba(5, 10, 25, 0.5);
+      top: 0; left: 0; right: 0;
+      height: 58vh;
+      background: url('hero-framing.jpg') center 30% / cover no-repeat;
       z-index: 0;
     }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+                  rgba(8,11,20,0.10) 0%,
+                  rgba(8,11,20,0.42) 42%,
+                  rgba(8,11,20,0.92) 80%,
+                  rgba(8,11,20,1) 100%);
+    }
+    @media (max-width: 600px) { .hero-bg { height: 48vh; } }
 
     /* Relámpago ocasional */
     .lightning {
@@ -461,18 +473,16 @@
   </style>
 </head>
 <body>
-  <canvas id="rain"></canvas>
-  <div class="overlay"></div>
-  <div class="lightning"></div>
-
+  <div class="hero-bg"></div>
+  
   <div class="container">
     <div class="avatar">
       <img src="avatar2.jpg" onerror="this.parentElement.innerHTML='🌩️'" alt="Josue Garibay">
     </div>
 
     <h1>Josue Garibay</h1>
-    <p class="tagline">Emprendedor · Phoenix, AZ</p>
-    <p class="bio">Construyendo mi marca e imperio. Te comparto el camino real, sin filtros.</p>
+    <p class="tagline">De la construcción a dueño de agencia</p>
+    <p class="bio">Entro a las 6 AM a la obra. En las tardes construyo mi negocio.<br>Phoenix, AZ · el camino real, sin filtros.</p>
     <p class="faith">✝️ Mensajero del Altísimo</p>
 
     <div class="links">
@@ -555,37 +565,6 @@
   </div>
 
   <script>
-    // Lluvia
-    const canvas = document.getElementById('rain');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-
-    const drops = Array.from({length: 120}, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      len: Math.random() * 20 + 10,
-      speed: Math.random() * 4 + 2,
-      opacity: Math.random() * 0.5 + 0.1
-    }));
-
-    function drawRain() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drops.forEach(d => {
-        ctx.beginPath();
-        ctx.moveTo(d.x, d.y);
-        ctx.lineTo(d.x - 1, d.y + d.len);
-        ctx.strokeStyle = `rgba(150, 210, 255, ${d.opacity})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        d.y += d.speed;
-        if (d.y > canvas.height) { d.y = -d.len; d.x = Math.random() * canvas.width; }
-      });
-      requestAnimationFrame(drawRain);
-    }
-    drawRain();
-
     // Reproductor de música
     (function () {
       const audio = document.getElementById('audio');

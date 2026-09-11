@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Beat 05 — Valores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent !important; width: 2160px; height: 3840px; overflow: hidden; font-family: 'Inter', sans-serif; color: #fff; }
+  .card {
+    position: absolute;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    padding: 64px 80px;
+    background: rgba(13, 13, 13, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(250, 197, 28, 0.22);
+    border-radius: 38px;
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.65);
+    opacity: 0;
+  }
+  .label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 50px;
+    letter-spacing: 6px;
+    color: #FAC51C;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  ul { list-style: none; }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    padding: 26px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  li:last-child { border-bottom: none; }
+  .num {
+    flex: 0 0 auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(250, 197, 28, 0.16);
+    border: 3px solid #FAC51C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 54px;
+    color: #FAC51C;
+  }
+  .text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 96px;
+    letter-spacing: -1px;
+    line-height: 1.05;
+    color: #FFFFFF;
+  }
+  .text .em { color: #FAC51C; }
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="label">Lo que hacemos</div>
+    <ul>
+      <li id="li1">
+        <div class="num">01</div>
+        <div class="text">Crear <span class="em">sinergias</span></div>
+      </li>
+      <li id="li2">
+        <div class="num">02</div>
+        <div class="text">Crecer <span class="em">juntos</span></div>
+      </li>
+      <li id="li3">
+        <div class="num">03</div>
+        <div class="text"><span class="em">Disfrutar</span> el camino</div>
+      </li>
+    </ul>
+  </div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo('#card',
+    { opacity: 0, y: 80 },
+    { opacity: 1, y: 0, duration: 0.30, ease: 'power3.out' }, 0.10);
+  // Items synced (beat starts at out_t 35.20)
+  // "Crear sinergias" at 35.44 → 0.24s
+  // "Crecer juntos" at 36.90 → 1.70s
+  // "Disfrutar" at 40.30 → 5.10s
+  tl.fromTo('#li1', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.32, ease: 'power3.out' }, 0.24);
+  tl.fromTo('#li2', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.32, ease: 'power3.out' }, 1.70);
+  tl.fromTo('#li3', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.32, ease: 'power3.out' }, 5.10);
+  tl.to('#card', { opacity: 0, y: -40, duration: 0.45, ease: 'power2.in' }, 6.05);
+  window.__timelines = { main: tl };
+  tl.play();
+</script>
+</body>
+</html>

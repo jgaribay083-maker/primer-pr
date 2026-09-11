@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Beat 04 — Tribu Divisual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent !important; width: 2160px; height: 3840px; overflow: hidden; font-family: 'Inter', sans-serif; color: #fff; }
+  .card {
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    padding: 70px 80px 80px;
+    background: rgba(13, 13, 13, 0.66);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(250, 197, 28, 0.28);
+    border-radius: 40px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7), 0 0 60px rgba(250, 197, 28, 0.10);
+    text-align: center;
+    opacity: 0;
+  }
+  .tag {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #FAC51C;
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+  .row { display: flex; align-items: center; justify-content: center; gap: 36px; margin-bottom: 24px; }
+  .iso { width: 180px; height: 180px; flex-shrink: 0; object-fit: contain; }
+  .trophy {
+    font-size: 170px;
+    line-height: 1;
+    flex: 0 0 auto;
+    filter: drop-shadow(0 0 24px rgba(250, 197, 28, 0.55));
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 170px;
+    letter-spacing: -3px;
+    line-height: 1;
+    color: #FFFFFF;
+  }
+  h1 .accent { color: #FAC51C; }
+  .footer {
+    margin-top: 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 56px;
+    color: #B0B0B0;
+    letter-spacing: 1px;
+  }
+  .stamp {
+    display: inline-block;
+    margin-top: 26px;
+    padding: 14px 36px;
+    background: #FAC51C;
+    color: #0D0D0D;
+    border-radius: 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="tag">+ otro logro más</div>
+    <div class="row">
+      <img class="iso" src="../logo-white.png" alt="">
+      <span class="trophy" aria-hidden="true">🏆</span>
+      <h1>TRIBU <span class="accent">DIVISUAL</span></h1>
+    </div>
+    <div class="footer">crecemos en cada premio</div>
+  </div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  // Card frame fades in earlier
+  tl.fromTo('#card',
+    { opacity: 0, y: 80, scale: 0.94 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.34, ease: 'power3.out' }, 0.10);
+  // Pop on tribu word at out_t 23.60 → beat-rel 23.60 - 22.50 = 1.10s
+  // We do an extra pop at that moment by scaling the title briefly
+  tl.fromTo('h1',
+    { scale: 0.9, opacity: 0.5 },
+    { scale: 1, opacity: 1, duration: 0.40, ease: 'back.out(2.4)' }, 1.10);
+  tl.to('#card', { opacity: 0, y: -40, duration: 0.45, ease: 'power2.in' }, 3.55);
+  window.__timelines = { main: tl };
+  tl.play();
+</script>
+</body>
+</html>

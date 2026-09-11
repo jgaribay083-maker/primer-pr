@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Beat 02 — Stat: Mejor comunidad del mundo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent !important; width: 2160px; height: 3840px; overflow: hidden; font-family: 'Inter', sans-serif; color: #fff; }
+  .card {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 44px 60px 56px;
+    background: rgba(13, 13, 13, 0.66);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(250, 197, 28, 0.28);
+    border-radius: 36px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7), 0 0 80px rgba(250, 197, 28, 0.12);
+    text-align: center;
+    opacity: 0;
+  }
+  .preheader {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: 5px;
+    color: #FAC51C;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .preheader::before, .preheader::after { content: '✦'; margin: 0 18px; opacity: 0.7; }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 116px;
+    letter-spacing: -2px;
+    line-height: 0.96;
+    color: #FFFFFF;
+  }
+  h1 .em { color: #FAC51C; }
+  .sublabel {
+    margin-top: 22px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 50px;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+    opacity: 0.92;
+    text-transform: uppercase;
+  }
+  .years {
+    margin-top: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 38px;
+  }
+  .year {
+    position: relative;
+    flex: 0 0 auto;
+    padding: 18px 40px 22px;
+    border-radius: 22px;
+    background: rgba(250, 197, 28, 0.12);
+    border: 3px solid #FAC51C;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 140px;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #FAC51C;
+    text-shadow: 0 0 40px rgba(250, 197, 28, 0.55);
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  .year .badge {
+    position: absolute;
+    top: -28px;
+    right: -22px;
+    background: #FAC51C;
+    color: #0D0D0D;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 16px;
+    letter-spacing: 1px;
+  }
+  .plus {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 100px;
+    color: #FFFFFF;
+    opacity: 0.4;
+  }
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="preheader">2× CONSECUTIVO</div>
+    <h1>MEJOR <span class="em">COMUNIDAD</span> DEL MUNDO</h1>
+    <div class="sublabel">EN INTELIGENCIA ARTIFICIAL</div>
+    <div class="years">
+      <div class="year" id="y2025">2025<div class="badge">1ª</div></div>
+      <span class="plus">+</span>
+      <div class="year" id="y2026">2026<div class="badge">2ª</div></div>
+    </div>
+  </div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo('#card',
+    { opacity: 0, y: 100 },
+    { opacity: 1, y: 0, duration: 0.32, ease: 'power3.out' }, 0.10);
+  // 2025 popIn at output 4.73 → beat-relative 4.73 - 3.40 = 1.33s
+  tl.fromTo('#y2025',
+    { opacity: 0, scale: 0.7 },
+    { opacity: 1, scale: 1, duration: 0.42, ease: 'back.out(2.4)' }, 1.33);
+  // 2026 popIn at 5.55 - 3.40 = 2.15s
+  tl.fromTo('#y2026',
+    { opacity: 0, scale: 0.7 },
+    { opacity: 1, scale: 1, duration: 0.42, ease: 'back.out(2.4)' }, 2.15);
+  // Hold and fade out at 4.5s (last 0.5s)
+  tl.to('#card', { opacity: 0, y: -40, duration: 0.45, ease: 'power2.in' }, 4.55);
+  window.__timelines = { main: tl };
+  tl.play();
+</script>
+</body>
+</html>

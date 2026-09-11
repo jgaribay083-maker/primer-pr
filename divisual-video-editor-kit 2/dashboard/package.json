@@ -1,0 +1,9 @@
+{
+  "name": "divisual-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "bun run server.ts",
+    "dev": "bun --hot server.ts"
+  }
+}

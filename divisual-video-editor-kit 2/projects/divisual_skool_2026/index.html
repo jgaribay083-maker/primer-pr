@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Beat 01 — Intro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent !important; width: 2160px; height: 3840px; overflow: hidden; font-family: 'Inter', sans-serif; color: #fff; }
+  .card {
+    position: absolute;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    padding: 60px 80px;
+    background: rgba(13, 13, 13, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(250, 197, 28, 0.22);
+    border-radius: 36px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+    text-align: center;
+    opacity: 0;
+  }
+  .row { display: flex; align-items: center; justify-content: center; gap: 40px; }
+  .pin { width: 92px; height: 92px; flex-shrink: 0; object-fit: contain; }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 130px;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: #FFFFFF;
+  }
+  h1 .accent { color: #FAC51C; }
+  .sub {
+    margin-top: 28px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 56px;
+    letter-spacing: 2px;
+    color: #B0B0B0;
+    text-transform: uppercase;
+  }
+  .dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #FAC51C; margin: 0 18px; vertical-align: middle; }
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="row">
+      <img class="pin" src="./logo-white.png" alt="">
+      <h1>OFICINAS DE <span class="accent">SKOOL</span></h1>
+    </div>
+    <div class="sub">LOS ÁNGELES <span class="dot"></span> CALIFORNIA</div>
+  </div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo('#card',
+    { opacity: 0, y: 80 },
+    { opacity: 1, y: 0, duration: 0.30, ease: 'power3.out' }, 0.10);
+  tl.to('#card', { opacity: 1, duration: 0.01 }, 2.40);
+  tl.to('#card', { opacity: 0, y: -40, duration: 0.40, ease: 'power2.in' }, 2.55);
+  window.__timelines = { main: tl };
+  tl.play();
+</script>
+</body>
+</html>

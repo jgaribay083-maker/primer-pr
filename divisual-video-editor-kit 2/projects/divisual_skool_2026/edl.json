@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "video_in": "input/IMG_0564.MOV",
+  "video_edited": "output/IMG_0564_edited.mp4",
+  "video_final": "output/IMG_0564_final.mp4",
+  "resolution": {"w": 2160, "h": 3840},
+  "fps": 60,
+  "aspect": "9:16",
+  "total_duration_s": 54.604,
+  "ranges": [
+    {"id": "A", "src_start": 0.65,  "src_end": 20.95, "out_start": 0.00,  "out_end": 20.30,
+     "beat": "HOOK", "quote": "Estoy en las oficinas de Skool recogiendo el premio por segunda vez consecutiva a la mejor comunidad de todo el mundo en IA, marketing y negocios digitales..."},
+    {"id": "B", "src_start": 21.60, "src_end": 43.74, "out_start": 20.30, "out_end": 42.44,
+     "beat": "BODY", "quote": "...mis redes sociales, otro logro para la tribu Divisual. Es un placer acompañaros, crear sinergias, crecer juntos y disfrutar de la vida."},
+    {"id": "C", "src_start": 50.22, "src_end": 62.33, "out_start": 42.44, "out_end": 54.55,
+     "beat": "CTA",  "quote": "Si no estás en la lista de espera a la tribu Divisual, únete ahora comentando la palabra «tribu»... Únete ahora a la mejor comunidad del mundo."}
+  ],
+  "removed": [
+    {"src_start": 0.0,   "src_end": 0.65,  "reason": "Filler 'Bueno,' inicial"},
+    {"src_start": 20.95, "src_end": 21.60, "reason": "Filler 'eh,' antes de 'mis redes'"},
+    {"src_start": 43.74, "src_end": 50.22, "reason": "Aside del coche - rompe pacing del cierre"}
+  ],
+  "beats": [
+    {"id": "beat_01_intro",     "start": 0.50,  "duration": 3.0, "anchor": "estoy@0.07/oficinas@1.05/Skool@1.89",
+     "type": "intro_location", "position": "top", "title": "OFICINAS DE SKOOL", "subtitle": "Los Ángeles, CA", "logo": true},
+    {"id": "beat_02_stat",      "start": 3.40,  "duration": 5.0, "anchor": "premio@3.73/segunda@4.73/consecutiva@5.55/comunidad@6.97",
+     "type": "stat_card",       "position": "top",
+     "label": "MEJOR COMUNIDAD DEL MUNDO", "sublabel": "EN INTELIGENCIA ARTIFICIAL",
+     "years": ["2025", "2026"], "year_pop_at": [4.73, 5.55]},
+    {"id": "beat_03_categorias", "start": 8.50,  "duration": 5.5, "anchor": "inteligencia@8.95/marketing@10.03/negocios@10.55",
+     "type": "list_synced",     "position": "top",
+     "items": [
+        {"text": "Inteligencia Artificial", "reveal_at": 8.95},
+        {"text": "Marketing", "reveal_at": 10.03},
+        {"text": "Negocios Digitales", "reveal_at": 10.55}
+     ]},
+    {"id": "beat_04_tribu",     "start": 22.50, "duration": 4.0, "anchor": "tribu@23.60/Divisual@23.78",
+     "type": "badge_logo",      "position": "top",
+     "main": "TRIBU DIVISUAL", "tag": "+ otro logro", "logo": true,
+     "main_pop_at": 23.60},
+    {"id": "beat_05_valores",   "start": 35.20, "duration": 6.5, "anchor": "Crear@35.44/sinergias@35.78/crecer@36.90/disfrutar@40.30",
+     "type": "list_synced",     "position": "top",
+     "items": [
+        {"text": "Crear sinergias", "reveal_at": 35.44},
+        {"text": "Crecer juntos",  "reveal_at": 36.90},
+        {"text": "Disfrutar el camino", "reveal_at": 40.30}
+     ]},
+    {"id": "beat_06_cta",       "start": 46.30, "duration": 4.2, "anchor": "comentando@46.00/palabra@46.74/tribu@47.58",
+     "type": "cta_highlight",   "position": "top",
+     "label": "COMENTA LA PALABRA", "highlight": "TRIBU", "highlight_pop_at": 47.58,
+     "footer": "y te envío el acceso directo"},
+    {"id": "beat_07_cierre",    "start": 50.60, "duration": 4.0, "anchor": "Únete@50.62/mejor@51.62/comunidad@52.04/mundo@53.80",
+     "type": "cierre",          "position": "top_with_logo_center",
+     "main": "ÚNETE AHORA", "subtitle": "A LA MEJOR COMUNIDAD DEL MUNDO", "logo": true,
+     "main_pop_at": 50.62}
+  ],
+  "karaoke": {
+    "enabled": true,
+    "source_words": "output/IMG_0564_transcript_clean.json",
+    "position": "bottom",
+    "active_color": "#FAC51C",
+    "rendering": "ass_subtitles_via_ffmpeg",
+    "applied": "last_in_filter_chain"
+  }
+}

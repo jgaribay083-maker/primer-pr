@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Beat 07 — Cierre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent !important; width: 2160px; height: 3840px; overflow: hidden; font-family: 'Inter', sans-serif; color: #fff; }
+  .card {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    padding: 80px 80px 90px;
+    background: rgba(13, 13, 13, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 3px solid #FAC51C;
+    border-radius: 44px;
+    box-shadow: 0 30px 110px rgba(0, 0, 0, 0.75), 0 0 90px rgba(250, 197, 28, 0.18);
+    text-align: center;
+    opacity: 0;
+  }
+  .iso { width: 320px; height: 320px; margin: 0 auto 28px; display: block; opacity: 0; }
+  .main {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 220px;
+    letter-spacing: -4px;
+    line-height: 1;
+    color: #FAC51C;
+    text-shadow: 0 0 60px rgba(250, 197, 28, 0.5);
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  .sub {
+    margin-top: 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -1px;
+    line-height: 1.05;
+    color: #FFFFFF;
+    opacity: 0;
+  }
+  .stamp {
+    display: inline-block;
+    margin-top: 36px;
+    padding: 16px 44px;
+    background: #FAC51C;
+    color: #0D0D0D;
+    border-radius: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 44px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <img class="iso" id="iso" src="../logo-white.png" alt="">
+    <div class="main" id="main">ÚNETE AHORA</div>
+    <div class="sub" id="sub">A LA MEJOR<br>COMUNIDAD DEL MUNDO</div>
+    <div class="stamp" id="stamp">tribu divisual</div>
+  </div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo('#card',
+    { opacity: 0, y: 80 },
+    { opacity: 1, y: 0, duration: 0.30, ease: 'power3.out' }, 0.0);
+  // Logo fades in immediately
+  tl.fromTo('#iso',
+    { opacity: 0, scale: 0.7 },
+    { opacity: 1, scale: 1, duration: 0.40, ease: 'back.out(2.0)' }, 0.05);
+  // "ÚNETE AHORA" pop synced to spoken word at out_t 50.62 → beat-rel 50.62 - 50.60 = 0.02s
+  tl.fromTo('#main',
+    { opacity: 0, scale: 0.7 },
+    { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.4)' }, 0.18);
+  // "A LA MEJOR..." appears around when speaker says "mejor" at 51.62 → beat-rel 1.02s
+  tl.fromTo('#sub',
+    { opacity: 0, y: 28 },
+    { opacity: 1, y: 0, duration: 0.40, ease: 'power3.out' }, 1.02);
+  // Stamp at end "mundo" at 53.80 → beat-rel 3.20s
+  tl.fromTo('#stamp',
+    { opacity: 0, y: 16 },
+    { opacity: 1, y: 0, duration: 0.30, ease: 'back.out(2.0)' }, 3.20);
+  tl.to('#card', { opacity: 0, duration: 0.30, ease: 'power2.in' }, 3.70);
+  window.__timelines = { main: tl };
+  tl.play();
+</script>
+</body>
+</html>

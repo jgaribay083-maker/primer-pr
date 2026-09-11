@@ -1,0 +1,28 @@
+# API keys
+.env
+
+# Vídeos (demasiado pesados para git)
+input/*
+output/*
+!input/.gitkeep
+!output/.gitkeep
+!output/compositions
+output/compositions/*
+!output/compositions/.gitkeep
+
+# Skills clonadas (se instalan via setup.sh)
+skills/video-use/
+skills/hyperframes/
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+.python-version
+
+# macOS
+.DS_Store
+
+# Proyectos de clientes (privados)
+projects/*/assets/
+projects/*/*.mp4
